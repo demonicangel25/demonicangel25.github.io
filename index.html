@@ -1,0 +1,33 @@
+<html>
+<head>
+
+<title>The Hero of The Forest</title>
+
+<link rel="stylesheet" href="adventure.css">
+</head>
+<body>
+
+<div id="cou">You are centered north to south and </div><div id="coue">centered east to west.</div>
+
+<p class="clear" id="location">You are at Home.</p>
+
+<p id="locainfo"> You are wake up inside a cottage. You can't remember who you are, but there is a piece of paper beside a book next to you. The book is missing pages.</p>
+
+<div class="container">
+<input type="text" id="inputbox" name="inputbox" value="What do you want to do?" onfocus="this.value=''" onblur="this.value='What do you want to do?'"><br />
+<button id="enter" class="enter" onclick="grabInput()">Lets do it!</button>
+
+<button id="north" onclick="north();loc()"></button>
+
+<button id="west" onclick="west();loc()"></button>
+
+<button id="east" onclick="east();loc()"></button>
+
+<button id="south" onclick="south();loc()"></button>
+
+</div>
+
+<script src="HeroOfForest.js"></script>
+
+</body>
+</html>

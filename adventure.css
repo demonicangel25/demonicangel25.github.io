@@ -1,0 +1,90 @@
+body {
+	background-image: url(images/oldpapertexture1.jpg);
+	background-color: grey;
+	background-position: center;
+	background-repeat: repeat-y;
+	background-size: 100%, 100%;
+	color: white;
+}
+* {
+	box-sizing: border-box;
+}
+
+button {
+	width:33.3%;
+	height:33.3%;
+	float:left;
+	font-size: 325%;
+	border:none;
+	background-color:transparent;
+	cursor:pointer;
+}
+button.enter {
+	display: none;
+}
+
+#inputbox {
+	width: auto;
+}
+
+#north {
+	transform: rotate(90deg);
+	clear:both;
+	margin-left:33.3%;
+}
+
+#north:after {
+	content: '\21A2';
+}
+
+#east {
+	content: '\21A2';
+	margin-left:33.3%;
+	float:left;
+}
+
+#east:after {
+	content: '\21A3';
+}
+
+#west {
+	clear:left;
+	float:left;
+}
+
+#west:after {
+	content: '\21A2';
+}
+
+#south {
+	transform: rotate(90deg);
+	margin-left:33.3%;
+	clear:left;
+	float:left;
+}
+
+#south:after {
+	content: '\21A3';
+}
+
+.container {
+	margin:auto;
+	width:200px;
+	height:200px;
+}
+#locainfo {
+	width:80vw;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30vh;
+}
+
+#location, #cou, #coue {
+	display:none;
+}
+
+@media only screen and (max-height:570px) {
+	#locainfo {
+		margin-top:auto;
+	}
+}
