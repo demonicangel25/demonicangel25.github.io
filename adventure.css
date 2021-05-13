@@ -23,46 +23,42 @@ button.enter {
 	display: none;
 }
 
+img {
+	width:100%;
+}
+
 #inputbox {
 	width: auto;
 }
-
 #north {
 	transform: rotate(90deg);
 	clear:both;
 	margin-left:33.3%;
 }
-
 #north:after {
 	content: '\21A2';
 }
-
 #east {
 	content: '\21A2';
 	margin-left:33.3%;
 	float:left;
 }
-
 #east:after {
 	content: '\21A3';
 }
-
 #west {
 	clear:left;
 	float:left;
 }
-
 #west:after {
 	content: '\21A2';
 }
-
 #south {
 	transform: rotate(90deg);
 	margin-left:33.3%;
 	clear:left;
 	float:left;
 }
-
 #south:after {
 	content: '\21A3';
 }
@@ -72,11 +68,16 @@ button.enter {
 	width:200px;
 	height:200px;
 }
+.imgC {
+	margin:auto;
+	width:500px;
+	height:500px;
+}
 #locainfo {
 	width:80vw;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:30vh;
+	margin-top:10vh;
 }
 
 #location, #cou, #coue {
