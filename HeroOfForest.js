@@ -885,17 +885,17 @@ function loccap() {
 
 function loc() {
 	if (sessionStorage.count==0 && sessionStorage.ecount==0) {
-	document.getElementById("location").innerHTML = "You are in the "+locations[0]+".";
 	locationNum = 0;
 	locationinfo();}
 
 	else if (sessionStorage.count==1 && sessionStorage.ecount==0){
 		if (altloc!==1) {
 		locationNum = 1;
-		locationinfo();}
-		else {
-		document.getElementById("location").innerHTML = "You are in the "+locations[24]+".";
+		document.getElementById("map").src="images/GameMap.jpg";
+		locationinfo();
+		} else {
 		locationNum = 24;
+		document.getElementById("map").src="images/GameMap_Cellar.jpg";
 		locationinfo();}}
 
 	else if (sessionStorage.count==1 && sessionStorage.ecount==1){
@@ -961,9 +961,11 @@ function loc() {
 	else if (sessionStorage.count==4 && sessionStorage.ecount==1){
 		if (altloc!==1) {
 		locationNum = 17;
+		document.getElementById("map").src="images/GameMap.jpg";
 		locationinfo();
 		} else {
 		locationNum = 18;
+		document.getElementById("map").src="images/GameMap_Treehouse.jpg";
 		locationinfo();}}
 	
 	else if (sessionStorage.count==1 && sessionStorage.ecount==2){
@@ -981,9 +983,11 @@ function loc() {
 	else if (sessionStorage.count==-1 && sessionStorage.ecount==2){
 		if (altloc!==1) {
 		locationNum = 22;
+		document.getElementById("map").src="images/GameMap.jpg";
 		locationinfo();
 		} else {
 		locationNum = 23;
+		document.getElementById("map").src="images/GameMap_Cave.jpg";
 		locationinfo();}}
 	
 	else {
@@ -1099,7 +1103,7 @@ function locationinfo() {
 		}
 	break;
 	case 12:
-		locinf = ["You are on the "+locations[12]+". You can see a trail lead into the forest to the north, as well as hear a fire snap and crackle to the south-west"];
+		locinf = ["You are on the "+locations[12]+". You can see a trail lead into the forest to the north, as well as hear a fire snap and crackle to the south-east"];
 		if (empty == "e") {
 			locinf.push(" ");
 		}
