@@ -437,20 +437,60 @@ function infoChange() {
 		
 		/*Enter Sub-Area*/
 		case commands[7]:/*treehouse*/
+			if (locationNum==17) {
+				altloc = 1;
+				loc();
+				loccap();
+			} else {
+				alert("I can't do that")
+			}
+		break;
 		case commands[9]:/*cave*/
+			if (locationNum==22) {
+				altloc = 1;
+				loc();
+				loccap();
+			} else {
+				alert("I can't do that")
+			}
+		break;
 		case commands[11]:/*Cellar*/
-			altloc = 1;
-			loc();
-			loccap();
+			if (locationNum==1) {
+				altloc = 1;
+				loc();
+				loccap();
+			} else {
+				alert("I can't do that")
+			}
 		break;
 		
 		/*Exit Sub-Area*/
 		case commands[8]:/*treehouse*/
+			if (locationNum==18) {
+				altloc = 0;
+				loc();
+				loccap();
+			} else {
+				alert("I can't do that")
+			}
+		break;
 		case commands[10]:/*cave*/
+			if (locationNum==23) {
+				altloc = 0;
+				loc();
+				loccap();
+			} else {
+				alert("I can't do that")
+			}
+		break;
 		case commands[12]:/*Cellar*/
-			altloc = 0;
-			loc();
-			loccap();
+			if (locationNum==24) {
+				altloc = 0;
+				loc();
+				loccap();
+			} else {
+				alert("I can't do that")
+			}
 		break;
 		
 		case commands[13]:
