@@ -1,31 +1,38 @@
+var canvas = document.getElementById('youAreHere');
+var ctx = canvas.getContext('2d');
+var box = {
+	img: document.getElementById("loc_icon"),
+	x:120,
+	y:91,
+	w:20,
+	h:10,
+};
+function drawStuff() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
+}
 var locations = ["Cottage"/*0*/, "North Yard"/*1*/, "North-East Yard"/*2*/, "East Yard"/*3*/, "South-East Yard"/*4*/, "South Yard"/*5*/, "South-West Yard"/*6*/, "West Yard"/*7*/, "North-West Yard"/*8*/, "North Forest Edge"/*9*/, "Southern Lake"/*10*/, "West Forest Edge"/*11*/, "Northern Trail"/*12*/, "South Graveyard Flower Patch"/*13*/, "Graveyard"/*14*/, "East Graveyard Flower Patch"/*15*/, "North Forest"/*16*/, "Base of Treehouse"/*17*/, "Treehouse"/*18*/, "Campsite"/*19*/, "Ropebridge"/*20*/, "East Lookout"/*21*/, "Cave Entrance"/*22*/, "Cave"/*23*/, "Cellar"/*24*/];
 var locationNum = 0;
 /* The current location value*/
 var nullns = [0,1,2,2,2,2,3,4,1,0,-1,-2,-1,-1,0];
 var nullwe = [-2,-2,-2,-1,0,1,1,1,2,3,-1,0,1,2,2];
 /*0 WFE, 1 SGFP, 2 Graveyard, 3 EGFP, 4 NFE, 5 N Trail, 6 N Forest, 7 Treehouse Base, 8 Campsite, 9 E Lookout, 10 SW Yard, 11 S Lake, 12 SE Yard, 13 Cave, 14 is Ropebridge*/
-
-
 var storyInv = [0,0,0,0,0,0,0,0,0];
 /*0 is book, 1 is paper_lakeBird, 2 is paper_northYard, 3 is paper_cave, 4 is paper_southWestYard, 5 is paper_cellar, 6 is paper_eastGraveFlower, 7 is paper_northEastYard, 8 is paper_cottage*/
 var paperLoc = [10,1,23,6,24,15,2,0];
 var storyInfo = ["No pages", "a character who has the ability to lockpick, which it use to sneak into their enemy's base", "a character who is able to fashion simple tools, like a basic torch out of a stick, some cloth, and gas or animal fat as fuel", "a character who fought against the forces of evil", "a character's enemy, who wishes to take control of the forest and exploit its resources", "a character falling under a curse, turning their memories into pages in a book", "a character's epic fight with their archnemesis, who had found their one true weakness", "a character's cottage, which was hidden away in case their weakness was exploited", "a character who lost their memories after the pages from its story was torn out. This paper looks like the last page of a book", "your ability to lockpick, which aided you in breaking into the base of an enemy", "your ablity to fashion simple tools, like a basic torch out of a stick, some cloth, and gas or animal fat as fuel", "your life of fighting evil, in order to protect those you love", "your enemy, who wishes to take control of the forest and exploit its resources", "you falling under a curse, turning your memories into pages in a book. There are a total of 8 pages", "your epic fight with your archnemesis, who had found your one true weakness", "your cottage, which you had hidden away in case your weakness was exploited",  "you losing your memories after the pages of your story was ripped out"];
 var bookInfo = ["It is a book missing all of it's pages. The title on the spine reads 'The Hero of the Forest'.", "It is a book that housed your story/memories."];
-
 var paperCount = 0;
 var paperMax = 8;
 var doIt = 0;
-
 var itemInv = [0,0,0,0,0,0,0,0,0,0,0];
 /*0 is worm, 1 is fishing rod, 2 is fish, 3 is wood board, 4 is gas can, 5 is large stick, 6 is rag, 7 is torch, 8 is ladder, 9 is shovel, 10 is the bobby pin*/
 var itemInfo = ["It's just a worm","It's a fishing rod. It looks old, but still works", "It's a fishing rod with a worm as bait", "It's just a fish", "It's a wood board, and it looks really sturdy", "It's a small gas can with some gas inside", "It's a large stick, about the size of an axe handle.","It's a rag. It's bone dry","It's an unlit torch you made. It's useless until it's lit","It's a lit torch you made. It casts a large light","It's a small ladder, just tall enough to reach gutters", "It's a shovel with a weak handle", "It's just a bobby pin"];
-
 var empty = "e";
 var input = "";
 var commands = ["help","inspect area", "check inventory", "grab book", "inspect book", "grab paper", "inspect paper", "enter treehouse", "exit treehouse", "enter cave", "exit cave", "enter cellar", "exit cellar", "grab worm", "inspect worm", "grab fishing rod", "inspect fishing rod", "put worm on fishing rod", "start fishing", "inspect fish", "give fish to bird", "grab board", "inspect board", "fix bridge", "grab gas can", "inspect gas can", "grab stick", "inspect stick", "grab rag", "inspect rag", "make torch", "inspect torch", "light torch", "grab ladder", "inspect ladder", "place ladder", "grab shovel", "inspect shovel", "dig up x", "grab bobby pin", "inspect bobby pin", "pick lock", "put book on lectern"];
 var locinf = "";
 var inputbox = document.getElementById("inputbox");
-
 inputbox.addEventListener("keyup", function(event) {
 	if(event.keyCode === 13) {
 		event.preventDefault();
@@ -33,13 +40,11 @@ inputbox.addEventListener("keyup", function(event) {
 		document.getElementById("inputbox").value = "";
 	}
 });
-
 document.addEventListener("keydown", function(event) {
 	if(event.keyCode !== 13) {
 		document.getElementById("inputbox").focus();
 	}
 });
-
 function reset() {
 	sessionStorage.count = 0;
 	sessionStorage.ecount = 0;
@@ -47,9 +52,7 @@ function reset() {
 	locinf = "";
 	altloc = 0;
 }
-
 window.onload = reset()
-
 function grabInput() {
 	input = document.getElementById("inputbox").value;
 	input = input.toLowerCase();
@@ -59,12 +62,9 @@ function grabInput() {
 		alert("I can't do that");
 	}
 }
-
 function check(loreum) {
 	return loreum == input;
 }
-	
-
 function infoChange() {
 	var tempc = JSON.parse(JSON.stringify(commands));
 	doIt = 0;
@@ -73,7 +73,7 @@ function infoChange() {
 			if (storyInv[0]<1 || locationNum!==24|| paperCount!==paperMax) {	
 				tempc.splice(42,1);
 			}
-			if (itemInv[10]!==1 || locationNum!==6 || storyInv[1]!==2) {	
+			if (itemInv[10]!==1 || locationNum!==6 || storyInv[1]!==2){	
 				tempc.splice(41,1);
 			}
 			if (itemInv[10]!==1) {	
@@ -160,7 +160,6 @@ function infoChange() {
 			if (itemInv[0]>=1||locationNum!==13) {
 				tempc.splice(13,1);
 			}
-			
 			if ((locationNum!==1) && (locationNum!==24)) {
 				tempc.splice(11,2);
 			} else if (locationNum==1) {
@@ -182,8 +181,6 @@ function infoChange() {
 			} else if (locationNum==18) {
 				tempc.splice(7,1);
 			}
-			
-			
 			if (paperCount==0||storyInv[0]==1) {
 				tempc.splice(6,1);
 			}
@@ -222,18 +219,14 @@ function infoChange() {
 			if (locationNum!==0 || storyInv[0]==1) {
 				tempc.splice(3,1);
 			}
-
 			document.getElementById("locainfo").innerHTML = tempc.join(", ");
 		break;
-		
 		case commands[1]:
 			locationinfo();
 		break;
-		
 		case commands[2]:
 			inventory();
 		break;
-		
 		case commands[3]:
 			if (storyInv[0] == 0 && locationNum == 0) {
 			storyInv[0] = 1;
@@ -251,7 +244,6 @@ function infoChange() {
 			alert("I can't do that");
 			}
 		break;
-		
 		case commands[4]:
 			if (storyInfo[0]=="No pages") {
 				document.getElementById("locainfo").innerHTML = bookInfo[0]
@@ -277,10 +269,8 @@ function infoChange() {
 					locinf[locinf.length-1] = "and " + locinf[locinf.length-1] + ".";
 					document.getElementById("locainfo").innerHTML = locinf.join(", ");
 				}
-				
 			}
 		break;
-		
 		case commands[5]:
 			for (x=1;x<storyInv.length;x++) {
 				switch (x) {
@@ -404,7 +394,6 @@ function infoChange() {
 			alert("I can't do that");
 			}
 		break;
-		
 		case commands[6]:
 			if (paperCount>=1 && storyInv[0]==0) {
 				locinf = ["You have "+paperCount];
@@ -434,7 +423,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		/*Enter Sub-Area*/
 		case commands[7]:/*treehouse*/
 			if (locationNum==17) {
@@ -463,7 +451,6 @@ function infoChange() {
 				alert("I can't do that")
 			}
 		break;
-		
 		/*Exit Sub-Area*/
 		case commands[8]:/*treehouse*/
 			if (locationNum==18) {
@@ -492,7 +479,6 @@ function infoChange() {
 				alert("I can't do that")
 			}
 		break;
-		
 		case commands[13]:
 			if (locationNum==13 && itemInv[0]==0) {
 				itemInv[0]=1;
@@ -503,7 +489,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[14]:
 			if (itemInv[0]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[0];
@@ -511,7 +496,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[15]:
 			if (locationNum==18 && itemInv[1]==0) {
 				itemInv[1]=1;
@@ -522,7 +506,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[16]:
 			if (itemInv[1]==1 && itemInv[0]!==2) {
 				document.getElementById("locainfo").innerHTML = itemInfo[1];
@@ -532,7 +515,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[17]:
 			if (itemInv[0]==1 && itemInv[1]==1) {
 				itemInv[0]=2;
@@ -543,7 +525,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[18]:
 			if (itemInv[0]==2 && locationNum == 10) {
 				itemInv[1]=2;
@@ -553,7 +534,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[19]:
 			if (itemInv[2]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[3];
@@ -561,7 +541,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[20]:
 			if (itemInv[2]==1 && locationNum == 10) {
 				itemInv[2] = 2;
@@ -570,7 +549,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[21]:
 			if (itemInv[3]==0 && locationNum == 19) {
 				itemInv[3] = 1;
@@ -579,7 +557,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[22]:
 			if (itemInv[3]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[4];
@@ -587,7 +564,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[23]:
 			if (itemInv[3]==1 && locationNum == 20) {
 				itemInv[3] = 2;
@@ -597,7 +573,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[24]:
 			if (itemInv[4]<1 && locationNum == 21) {
 				itemInv[4] = 1;
@@ -606,7 +581,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[25]:
 			if (itemInv[4]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[5];
@@ -614,7 +588,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[26]:
 			if (itemInv[5]<1 && locationNum == 16) {
 				itemInv[5] = 1;
@@ -623,7 +596,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[27]:
 			if (itemInv[5]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[6];
@@ -631,7 +603,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[28]:
 			if (itemInv[6]<1 && locationNum == 9) {
 				itemInv[6] = 1;
@@ -640,7 +611,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[29]:
 			if (itemInv[6]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[7];
@@ -648,7 +618,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[30]:
 			if((itemInv[4]&&itemInv[5]&&itemInv[6])==1&&(storyInv[2]==2)) {
 				itemInv[4]=2;
@@ -670,7 +639,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[31]:
 			if (itemInv[7]==1) {
 				document.getElementById("locainfo").innerHTML = itemInfo[8];
@@ -680,7 +648,6 @@ function infoChange() {
 				alert("I can't do that");
 			}
 		break;
-		
 		case commands[32]:
 			if (locationNum==19 && itemInv[7]==1) {
 				itemInv[7]=2;
@@ -776,7 +743,6 @@ function infoChange() {
 		break;
 	}
 }
-
 function north() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.count) {
@@ -796,7 +762,6 @@ function north() {
 	}
 	loccap();
 }
-
 function south() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.count) {
@@ -816,7 +781,6 @@ function south() {
 	}
 	loccap();
 }
-
 function east() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.ecount) {
@@ -836,7 +800,6 @@ function east() {
 	}
 	loccap();
 }
-
 function west() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.ecount) {
@@ -856,12 +819,10 @@ function west() {
 	}
 	loccap();
 }
-
 north();
 south();
 east();
 west();
-
 function loccap() {
 	if ((sessionStorage.count==nullns[2] && sessionStorage.ecount==nullwe[2]) ||
 	(sessionStorage.count==nullns[3] && sessionStorage.ecount==nullwe[3]) ||
@@ -876,7 +837,6 @@ function loccap() {
 		document.getElementById("north").disabled = false;
 		document.getElementById("north").style.cursor = "pointer";
 	}
-
 	if ((sessionStorage.count==nullns[5] && sessionStorage.ecount==nullwe[5]) || 
 	(sessionStorage.count==nullns[6] && sessionStorage.ecount==nullwe[6]) ||
 	(sessionStorage.count==nullns[7] && sessionStorage.ecount==nullwe[7]) || 
@@ -892,7 +852,6 @@ function loccap() {
 		document.getElementById("east").disabled = false;
 		document.getElementById("east").style.cursor = "pointer";
 	}
-	
 	if ((sessionStorage.count==nullns[0] && sessionStorage.ecount==nullwe[0]) ||
 	(sessionStorage.count==nullns[9] && sessionStorage.ecount==nullwe[9]) ||
 	(sessionStorage.count==nullns[10] && sessionStorage.ecount==nullwe[10]) ||
@@ -906,7 +865,6 @@ function loccap() {
 		document.getElementById("south").disabled = false;
 		document.getElementById("south").style.cursor = "pointer";
 	}
-
 	if ((sessionStorage.count==nullns[0] && sessionStorage.ecount==nullwe[0]) ||
 	(sessionStorage.count==nullns[1] && sessionStorage.ecount==nullwe[1]) ||
 	(sessionStorage.count==nullns[2] && sessionStorage.ecount==nullwe[2]) ||
@@ -922,119 +880,212 @@ function loccap() {
 		document.getElementById("west").style.cursor = "pointer";
 	}
 }
-
 function loc() {
-	if (sessionStorage.count==0 && sessionStorage.ecount==0) {
-	locationNum = 0;
-	locationinfo();}
-
-	else if (sessionStorage.count==1 && sessionStorage.ecount==0){
-		if (altloc!==1) {
-		locationNum = 1;
-		document.getElementById("map").src="images/GameMap.jpg";
-		locationinfo();
-		} else {
-		locationNum = 24;
-		document.getElementById("map").src="images/GameMap_Cellar.jpg";
-		locationinfo();}}
-
-	else if (sessionStorage.count==1 && sessionStorage.ecount==1){
-	locationNum = 2;
-	locationinfo();}
-
-	else if (sessionStorage.count==0 && sessionStorage.ecount==1){
-	locationNum = 3;
-	locationinfo();}
-
-	else if (sessionStorage.count==-1 && sessionStorage.ecount==1){
-	locationNum = 4;
-	locationinfo();}
-
-	else if (sessionStorage.count==-1 && sessionStorage.ecount==0){
-	locationNum = 5;
-	locationinfo();}
-	
-	else if (sessionStorage.count==-1 && sessionStorage.ecount==-1){
-	locationNum = 6;
-	locationinfo();}
-
-	else if (sessionStorage.count==0 && sessionStorage.ecount==-1){
-	locationNum = 7;
-	locationinfo();}
-
-	else if (sessionStorage.count==1 && sessionStorage.ecount==-1){
-	locationNum = 8;
-	locationinfo();}
-	
-	else if (sessionStorage.count==2 && sessionStorage.ecount==0){
-	locationNum = 9;
-	locationinfo();}
-	
-	else if (sessionStorage.count==-2 && sessionStorage.ecount==0){
-	locationNum = 10;
-	locationinfo();}
-	
-	else if (sessionStorage.count==0 && sessionStorage.ecount==-2){
-	locationNum = 11;
-	locationinfo();}
-	
-	else if (sessionStorage.count==2 && sessionStorage.ecount==1){
-	locationNum = 12;
-	locationinfo();}
-	
-	else if (sessionStorage.count==1 && sessionStorage.ecount==-2){
-	locationNum = 13;
-	locationinfo();}
-	
-	else if (sessionStorage.count==2 && sessionStorage.ecount==-2){
-	locationNum = 14;
-	locationinfo();}
-	
-	else if (sessionStorage.count==2 && sessionStorage.ecount==-1){
-	locationNum = 15;
-	locationinfo();}
-	
-	else if (sessionStorage.count==3 && sessionStorage.ecount==1){
-	locationNum = 16;
-	locationinfo();}
-	
-	else if (sessionStorage.count==4 && sessionStorage.ecount==1){
-		if (altloc!==1) {
-		locationNum = 17;
-		document.getElementById("map").src="images/GameMap.jpg";
-		locationinfo();
-		} else {
-		locationNum = 18;
-		document.getElementById("map").src="images/GameMap_Treehouse.jpg";
-		locationinfo();}}
-	
-	else if (sessionStorage.count==1 && sessionStorage.ecount==2){
-	locationNum = 19;
-	locationinfo();}
-	
-	else if (sessionStorage.count==0 && sessionStorage.ecount==2){
-	locationNum = 20;
-	locationinfo();}
-	
-	else if (sessionStorage.count==0 && sessionStorage.ecount==3){
-	locationNum = 21;
-	locationinfo();}
-	
-	else if (sessionStorage.count==-1 && sessionStorage.ecount==2){
-		if (altloc!==1) {
-		locationNum = 22;
-		document.getElementById("map").src="images/GameMap.jpg";
-		locationinfo();
-		} else {
-		locationNum = 23;
-		document.getElementById("map").src="images/GameMap_Cave.jpg";
-		locationinfo();}}
-	
-	else {
-	document.getElementById("location").innerHTML = "You are lost.";
+	switch (Number(sessionStorage.count)) {
+		case -2:
+			if (sessionStorage.ecount==0){
+			locationNum = 10;
+			box.x=120;
+			box.y=132;
+			drawStuff();
+			locationinfo();}
+			else {
+				document.getElementById("location").innerHTML = "You are lost.";
+			}
+		break;
+		case -1:
+			if (sessionStorage.ecount==2){
+				if (altloc!==1) {
+				locationNum = 22;
+				box.x=201;
+				box.y=111;
+				drawStuff();
+				document.getElementById("map").src="images/GameMap.jpg";
+				locationinfo();
+				} else {
+				locationNum = 23;
+				document.getElementById("map").src="images/GameMap_Cave.jpg";
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				locationinfo();}}
+			else if (sessionStorage.ecount==1){
+				locationNum = 4;
+				box.x=161;
+				box.y=111;
+				drawStuff();
+				locationinfo();}
+			else if (sessionStorage.ecount==0){
+				locationNum = 5;
+				box.x=120;
+				box.y=111;
+				drawStuff();
+				locationinfo();}
+			else if (sessionStorage.ecount==-1){
+				locationNum = 6;
+				box.x=78;
+				box.y=111;
+				drawStuff();
+				locationinfo();}
+			else {
+				document.getElementById("location").innerHTML = "You are lost.";}
+		break;
+		case 0:
+			switch (Number(sessionStorage.ecount)) {
+				case 3:
+					locationNum = 21;
+					box.x=243;
+					box.y=91;
+					drawStuff();
+					locationinfo();
+				break;
+				case 2:
+					locationNum = 20;
+					box.x=201;
+					box.y=91;
+					drawStuff();
+					locationinfo();
+				break;
+				case 1:
+					locationNum = 3;
+					box.x=161;
+					box.y=91;
+					drawStuff();
+					locationinfo();
+				break;
+				case 0:
+					locationNum = 0;
+					box.x=120;
+					box.y=91;
+					drawStuff();
+					locationinfo();
+				break;
+				case -1:
+					locationNum = 7;
+					box.x=78;
+					box.y=91;
+					drawStuff();
+					locationinfo();
+				break;
+				case -2:
+					locationNum = 11;
+					box.x=37;
+					box.y=91;
+					drawStuff();
+					locationinfo();
+				break;
+				default:
+					document.getElementById("location").innerHTML = "You are lost.";
+			}
+		break;
+		case 1:
+			switch(Number(sessionStorage.ecount)) {
+				case 2:
+					locationNum = 19;
+					box.x=201;
+					box.y=70;
+					drawStuff();
+					locationinfo();
+				break;
+				case 1:
+					locationNum = 2;
+					box.x=161;
+					box.y=70;
+					drawStuff();
+					locationinfo();
+				break;
+				case 0:
+					if (altloc!==1) {
+						locationNum = 1;
+						document.getElementById("map").src="images/GameMap.jpg";
+						locationinfo();
+						box.x=120;
+						box.y=70;
+						drawStuff();
+					} else {
+						locationNum = 24;
+						document.getElementById("map").src="images/GameMap_Cellar.jpg";
+						ctx.clearRect(0, 0, canvas.width, canvas.height);
+						locationinfo();}
+				break;
+				case -1:
+					locationNum = 8;
+					box.x=78;
+					box.y=70;
+					drawStuff();
+					locationinfo();
+				break;
+				case -2:
+					locationNum = 13;
+					box.x=37;
+					box.y=70;
+					drawStuff();
+					locationinfo();
+				break;
+				default:
+					document.getElementById("location").innerHTML = "You are lost.";
+			}
+		break;
+		case 2:
+			if (sessionStorage.ecount==1){
+				locationNum = 12;
+				box.x=161;
+				box.y=49;
+				drawStuff();
+				locationinfo();}
+			else if (sessionStorage.ecount==0){
+				locationNum = 9;
+				box.x=120;
+				box.y=49;
+				drawStuff();
+				locationinfo();}
+			else if (sessionStorage.ecount==-1){
+				locationNum = 15;
+				box.x=78;
+				box.y=49;
+				drawStuff();
+				locationinfo();}
+			else if (sessionStorage.ecount==-2){
+				locationNum = 14;
+				box.x=37;
+				box.y=49;
+				drawStuff();
+				locationinfo();}
+			else {
+				document.getElementById("location").innerHTML = "You are lost.";
+			}
+		break;
+		case 3:
+			if (sessionStorage.ecount==1){
+				locationNum = 16;
+				box.x=161;
+				box.y=29;
+				drawStuff();
+				locationinfo();}
+			else {
+				document.getElementById("location").innerHTML = "You are lost.";
+			}
+		break;
+		case 4:
+			if (sessionStorage.ecount==1){
+				if (altloc!==1) {
+					locationNum = 17;
+					document.getElementById("map").src="images/GameMap.jpg";
+					box.x=161;
+					box.y=8;
+					drawStuff();
+					locationinfo();
+				} else {
+					locationNum = 18;
+					document.getElementById("map").src="images/GameMap_Treehouse.jpg";
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					locationinfo();}}
+			else {
+				document.getElementById("location").innerHTML = "You are lost.";
+			}
+		break;
+		default:
+			alert("Failed Checks");
 	}
 }
-
 function locationinfo() {
 	switch (locationNum) {
 	case 0:
@@ -1147,7 +1198,6 @@ function locationinfo() {
 		if (empty == "e") {
 			locinf.push(" ");
 		}
-	
 	break;
 	case 13:
 		locinf = ["You are in the "+locations[13]+". The flowers are all white lilies, and looking at them fill you with a sense of sadness.  You can see a small graveyard to the north, and more flowers to the north-east"];
@@ -1264,7 +1314,6 @@ function locationinfo() {
 	}
 	document.getElementById("locainfo").innerHTML = locinf.join(". ") ;
 }
-
 function inventory() {
 	locinf = ["You have"];
 	if (storyInv[0] == 1 && paperCount==0) {
@@ -1281,7 +1330,6 @@ function inventory() {
 		} else {
 		locinf.push(paperCount+" papers inside");}
 	}
-		
 	if (locinf.length == 2) {
 		locinf[1] = locinf[1] + ".";
 		locinf = locinf.join(" ");
@@ -1291,7 +1339,6 @@ function inventory() {
 	}
 	if (locinf == "You have") {
 		locinf = locinf[0]+" no important documents.";}
-
 	locinf = locinf.split();
 	if (itemInv.includes(1)){
 		locinf.push("You also have");
@@ -1333,9 +1380,7 @@ function inventory() {
 		if (itemInv[10]==1) {
 			locinf.push("a bobby pin");
 		}
-		
 	}
-	
 	if (locinf.length == 3) {
 		locinf[2] = locinf[2]+".";
 		locinf = locinf.join(" ");
@@ -1348,6 +1393,5 @@ function inventory() {
 		locinf[(locinf.length-1)]="and "+locinf[(locinf.length-1)]+".";
 		locinf = locinf.join(", ");
 	}
-	
 	document.getElementById("locainfo").innerHTML = locinf;
 }

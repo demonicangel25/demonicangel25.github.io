@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -27,8 +28,15 @@
 <button id="south" onclick="south();loc()"></button>
 </div>
 
+<div style="display:none">
+	<img id="loc_icon" src="images/location_icon.png" onload="drawStuff()">
+</div>
+
 <div class="imgC">
-<img id="map" src="images/GameMap.jpg">
+	<div class="mapHolder">
+		<img id="map" src="images/GameMap.jpg">
+		<canvas id="youAreHere"></canvas>
+	</div>
 </div>
 
 <script src="HeroOfForest.js"></script>
