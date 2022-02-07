@@ -1,12 +1,20 @@
 var canvas = document.getElementById('youAreHere');
 var ctx = canvas.getContext('2d');
-var box = {
-	img: document.getElementById("loc_icon"),
-	x:120,
-	y:91,
-	w:20,
-	h:10,
-};
+var box;
+function loadBox() {
+	if (document.getElementById("loc_icon").complete===false) {
+		window.setTimeout(loadBox,50);
+		return;
+	} else {
+		box = {
+		img: document.getElementById("loc_icon"),
+		x:120,
+		y:91,
+		w:20,
+		h:10,};
+		drawStuff();
+	}
+}
 function drawStuff() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
