@@ -7,6 +7,8 @@ var box = {
 	w:20,
 	h:10,
 };
+
+box.addEventListener('load', drawStuff);
 function drawStuff() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
