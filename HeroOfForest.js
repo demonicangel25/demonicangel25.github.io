@@ -1,11 +1,8 @@
 var canvas = document.getElementById('youAreHere');
 var ctx = canvas.getContext('2d');
 var box;
-function loadBox() {
-	if (document.getElementById("loc_icon").complete===false) {
-		window.setTimeout(loadBox,50);
-		return;
-	} else {
+function loadBox () {
+	if (getElementById("loc_icon").complete===true) {
 		box = {
 		img: document.getElementById("loc_icon"),
 		x:120,
@@ -13,6 +10,9 @@ function loadBox() {
 		w:20,
 		h:10,};
 		drawStuff();
+	} else {
+		window.setTimeout(loadBox,50);
+		return;
 	}
 }
 function drawStuff() {
