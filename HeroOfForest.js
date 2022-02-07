@@ -8,7 +8,7 @@ var box = {
 	h:10,
 };
 
-box.addEventListener('load', drawStuff);
+dcument.getElementById("loc_icon").addEventListener('load', drawStuff);
 function drawStuff() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
