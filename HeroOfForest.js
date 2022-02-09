@@ -11,6 +11,7 @@ function drawStuff() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
 }
+window.onload = drawStuff()
 var locations = ["Cottage"/*0*/, "North Yard"/*1*/, "North-East Yard"/*2*/, "East Yard"/*3*/, "South-East Yard"/*4*/, "South Yard"/*5*/, "South-West Yard"/*6*/, "West Yard"/*7*/, "North-West Yard"/*8*/, "North Forest Edge"/*9*/, "Southern Lake"/*10*/, "West Forest Edge"/*11*/, "Northern Trail"/*12*/, "South Graveyard Flower Patch"/*13*/, "Graveyard"/*14*/, "East Graveyard Flower Patch"/*15*/, "North Forest"/*16*/, "Base of Treehouse"/*17*/, "Treehouse"/*18*/, "Campsite"/*19*/, "Ropebridge"/*20*/, "East Lookout"/*21*/, "Cave Entrance"/*22*/, "Cave"/*23*/, "Cellar"/*24*/];
 var locationNum = 0;
 /* The current location value*/
