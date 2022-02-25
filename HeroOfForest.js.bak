@@ -7,7 +7,7 @@ var box = {
 	w:20,
 	h:10,
 };
-ctx.imageSmoothingQuality = "low";
+ctx.imageSmoothingQuality = "high";
 function drawStuff() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
@@ -200,6 +200,11 @@ function infoChange() {
 						doIt = doIt+1;
 					}
 					break;
+					case 3:
+					if ((locationNum==paperLoc[x-1])==false||(storyInv[x]>=1 && locationNum == paperLoc[x-1])||
+					(itemInv[7]!==2)) {
+						doIt = doIt+1;
+					}
 					case 4:
 					if ((locationNum==paperLoc[x-1])==false||(storyInv[x]>=1 && locationNum == paperLoc[x-1])||
 					(itemInv[10]!==2)) {

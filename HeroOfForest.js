@@ -200,6 +200,11 @@ function infoChange() {
 						doIt = doIt+1;
 					}
 					break;
+					case 3:
+					if ((locationNum==paperLoc[x-1])==false||(storyInv[x]>=1 && locationNum == paperLoc[x-1])||
+					(itemInv[7]!==2)) {
+						doIt = doIt+1;
+					}
 					case 4:
 					if ((locationNum==paperLoc[x-1])==false||(storyInv[x]>=1 && locationNum == paperLoc[x-1])||
 					(itemInv[10]!==2)) {
@@ -212,7 +217,7 @@ function infoChange() {
 					}
 				}
 			}
-			if (doIt==(storyInv.length-1)) {
+			if (doIt==(storyInv.length)) {
 				tempc.splice(5,1);
 			}
 			if (storyInv[0]==0) {
