@@ -217,7 +217,7 @@ function infoChange() {
 					}
 				}
 			}
-			if (doIt==(storyInv.length-1)) {
+			if (doIt==(storyInv.length)) {
 				tempc.splice(5,1);
 			}
 			if (storyInv[0]==0) {
@@ -723,14 +723,21 @@ function infoChange() {
 			}
 		break;
 		case commands[41]:
-			if (itemInv[10]==1 && storyInv[1]==2 && locationNum==6) {
-				itemInv[10]=2;
-				document.getElementById("locainfo").innerHTML = "You manage to pick the lock! Unfortunatly you broke the bobby pin in the process. Inside the chest is a piece of paper, and that's it.";
-			} else if (storyInv[1]<2) {
-				document.getElementById("locainfo").innerHTML = "I don't know how.";
+			if (itemInv[9]==2 && locationNum==6) {
+				if (itemInv[10]==1 && storyInv[1]==2) {
+					itemInv[10]=2;
+					document.getElementById("locainfo").innerHTML = "You manage to pick the lock! Unfortunatly you broke the bobby pin in the process. Inside the chest is a piece of paper, and that's it.";
+				} else if (itemInv[10]!==1 && storyInv[1]==2) {
+					document.getElementById("locainfo").innerHTML = "I don't have a bobby pin to do that with.";
+				} else if (itemInv[10]==1 && storyInv[1]!==2) {
+					document.getElementById("locainfo").innerHTML = "I don't know how.";
+				} else {
+					alert("I can't do that");
+				}
 			} else {
 				alert("I can't do that");
-			}
+			}		
+
 		break;
 		case commands[42]:
 			if (storyInv[0]==1 && paperCount==paperMax && locationNum==24) {
