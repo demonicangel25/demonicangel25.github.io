@@ -35,6 +35,7 @@ var input = "";
 var commands = ["help","inspect area", "check inventory", "grab book", "inspect book", "grab paper", "inspect paper", "enter treehouse", "exit treehouse", "enter cave", "exit cave", "enter cellar", "exit cellar", "grab worm", "inspect worm", "grab fishing rod", "inspect fishing rod", "put worm on fishing rod", "start fishing", "inspect fish", "give fish to bird", "grab board", "inspect board", "fix bridge", "grab gas can", "inspect gas can", "grab stick", "inspect stick", "grab rag", "inspect rag", "make torch", "inspect torch", "light torch", "grab ladder", "inspect ladder", "place ladder", "grab shovel", "inspect shovel", "dig up x", "grab bobby pin", "inspect bobby pin", "pick lock", "put book on lectern"];
 var locinf = "";
 var inputbox = document.getElementById("inputbox");
+var inputCount = -4;
 inputbox.addEventListener("keyup", function(event) {
 	if(event.keyCode === 13) {
 		event.preventDefault();
@@ -53,6 +54,7 @@ function reset() {
 	locationNum = 0;
 	locinf = "";
 	altloc = 0;
+	inputCount = -4;
 }
 window.onload = reset()
 function grabInput() {
@@ -60,6 +62,7 @@ function grabInput() {
 	input = input.toLowerCase();
 	if (commands.some(check) == true) {
 		infoChange(input, commands);
+		inputCount = inputCount + 1;
 	} else {
 		alert("I can't do that");
 	}
@@ -737,7 +740,6 @@ function infoChange() {
 			} else {
 				alert("I can't do that");
 			}		
-
 		break;
 		case commands[42]:
 			if (storyInv[0]==1 && paperCount==paperMax && locationNum==24) {
@@ -761,8 +763,10 @@ function north() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.count) {
 			sessionStorage.count = Number(sessionStorage.count)+1;
+			inputCount = inputCount + 1;
 		} else {
 			sessionStorage.count = 1;
+			inputCount = inputCount + 1;
 		}
 			if (sessionStorage.count>0) {
 			document.getElementById("cou").innerHTML = "You are "+sessionStorage.getItem("count")+" feet north and ";
@@ -780,8 +784,10 @@ function south() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.count) {
 			sessionStorage.count = Number(sessionStorage.count)-1;
+			inputCount = inputCount + 1;
 		} else {
 			sessionStorage.count = -1;
+			inputCount = inputCount + 1;
 		}
 			if (sessionStorage.count>0) {
 			document.getElementById("cou").innerHTML = "You are "+sessionStorage.getItem("count")+" feet north and ";
@@ -799,8 +805,10 @@ function east() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.ecount) {
 			sessionStorage.ecount = Number(sessionStorage.ecount)+1;
+			inputCount = inputCount + 1;
 		} else {
 			sessionStorage.ecount = 1;
+			inputCount = inputCount + 1;
 		}
 			if (sessionStorage.ecount>0) {
 			document.getElementById("coue").innerHTML =sessionStorage.getItem("ecount")+" feet east.";
@@ -818,8 +826,10 @@ function west() {
 	if (typeof(Storage) !== "undefined") {
 		if (sessionStorage.ecount) {
 			sessionStorage.ecount = Number(sessionStorage.ecount)-1;
+			inputCount = inputCount + 1;
 		} else {
 			sessionStorage.ecount = -1;
+			inputCount = inputCount + 1;
 		}
 			if (sessionStorage.ecount>0) {
 			document.getElementById("coue").innerHTML =sessionStorage.getItem("ecount")+" feet east.";
