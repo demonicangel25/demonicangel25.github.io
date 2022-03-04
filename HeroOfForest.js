@@ -12,7 +12,18 @@ function drawStuff() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
 }
-box.img.addEventListener("load", drawStuff());
+document.getElementById("loc_icon").addEventListener("load", drawStuff());
+var start = new Date();
+var intervalRef;
+intervalRef = setInterval(_ => {
+  let current = new Date();
+  let count = +current - +start;
+  
+  let ms = count % 1000;
+  let s = Math.floor((count /  1000)) % 60;
+  let m = Math.floor((count / 60000)) % 60;
+  let h = Math.floor((count/3600000))%24;
+}, 10);
 var locations = ["Cottage"/*0*/, "North Yard"/*1*/, "North-East Yard"/*2*/, "East Yard"/*3*/, "South-East Yard"/*4*/, "South Yard"/*5*/, "South-West Yard"/*6*/, "West Yard"/*7*/, "North-West Yard"/*8*/, "North Forest Edge"/*9*/, "Southern Lake"/*10*/, "West Forest Edge"/*11*/, "Northern Trail"/*12*/, "South Graveyard Flower Patch"/*13*/, "Graveyard"/*14*/, "East Graveyard Flower Patch"/*15*/, "North Forest"/*16*/, "Base of Treehouse"/*17*/, "Treehouse"/*18*/, "Campsite"/*19*/, "Ropebridge"/*20*/, "East Lookout"/*21*/, "Cave Entrance"/*22*/, "Cave"/*23*/, "Cellar"/*24*/];
 var locationNum = 0;
 /* The current location value*/
@@ -743,7 +754,7 @@ function infoChange() {
 		break;
 		case commands[42]:
 			if (storyInv[0]==1 && paperCount==paperMax && locationNum==24) {
-				document.getElementById("locainfo").innerHTML = "You return the book of your memories to their rightful place, and the book flies open. Pages begin flipping one after another, turing to golden dust and swirling around you. Once they've all turned to dust, the book slams shut and the dust glows brightly before disappearing. CONGRATS, YOU DID IT!!! You won in "+inputCount+" moves! (credit to Kevin Silveira for maps)";
+				document.getElementById("locainfo").innerHTML = "You return the book of your memories to their rightful place, and the book flies open. Pages begin flipping one after another, turing to golden dust and swirling around you. Once they've all turned to dust, the book slams shut and the dust glows brightly before disappearing. CONGRATS, YOU DID IT!!! You won in "+inputCount+" moves and it took you"+(h + " hours " + m + " minutes " + s + " seconds and " + ms)+" milliseconds to complete (credit to Kevin Silveira for maps)";
 				document.getElementById("inputbox").disabled = true;
 				document.getElementById("north").disabled = true;
 				document.getElementById("north").style.cursor = "not-allowed";
