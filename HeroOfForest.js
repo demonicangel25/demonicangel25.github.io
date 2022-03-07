@@ -763,7 +763,7 @@ function infoChange() {
 		break;
 		case commands[42]:
 			if (storyInv[0]==1 && paperCount==paperMax && locationNum==24) {
-				document.getElementById("locainfo").innerHTML = "You return the book of your memories to their rightful place, and the book flies open. Pages begin flipping one after another, turing to golden dust and swirling around you. Once they've all turned to dust, the book slams shut and the dust glows brightly before disappearing. CONGRATS, YOU DID IT!!! You won in "+inputCount+" moves and it took you"+h + " hours " + m + " minutes " + s + " seconds and " + ms+" milliseconds to complete (credit to Kevin Silveira for maps)";
+				document.getElementById("locainfo").innerHTML = "You return the book of your memories to their rightful place, and the book flies open. Pages begin flipping one after another, turing to golden dust and swirling around you. Once they've all turned to dust, the book slams shut and the dust glows brightly before disappearing. CONGRATS, YOU DID IT!!! You won in "+inputCount+" moves and it took you"+ h + " hours " + m + " minutes " + s + " seconds and " + ms+" milliseconds to complete (credit to Kevin Silveira for maps)";
 				document.getElementById("inputbox").disabled = true;
 				document.getElementById("north").disabled = true;
 				document.getElementById("north").style.cursor = "not-allowed";

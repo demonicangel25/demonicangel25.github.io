@@ -29,7 +29,7 @@
 </div>
 
 <div style="display:none">
-	<img id="loc_icon" src="images/location_icon.png"">
+	<img id="loc_icon" src="images/location_icon.png" onload="drawStuff()">
 </div>
 
 <div class="imgC">
@@ -39,7 +39,16 @@
 	</div>
 </div>
 
-<script src="HeroOfForest.js"></script>
 
+
+<button onclick="win()">Win</button>
+
+<script src="HeroOfForest.js"></script>
+<script>
+function win() {
+	storyInv[0]=1;
+	paperCount=paperMax;
+}
+</script>
 </body>
 </html>
